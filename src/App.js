@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import { Router, Route } from 'react-router'
@@ -8,6 +6,9 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import reducers from './reducers/reducers'
 import NavigationBar from './components/navigationbar.react.js'
 import {Jumbotron, Button} from 'react-bootstrap'
+
+import logo from './css/logo.svg';
+import './css/App.css';
 const store = createStore(
   combineReducers({
     ...reducers,
