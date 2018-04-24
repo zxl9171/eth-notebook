@@ -9,7 +9,6 @@ import {Jumbotron, Button} from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
 import Home from './components/Home.react.js'
 import Reader from './components/Reader.react.js'
-import MarkdownEditor from './components/MarkdownEditor.react.js'
 import logo from './css/logo.svg';
 import './css/App.css';
 
@@ -27,16 +26,6 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <NavigationBar />
-          <Jumbotron>
-            <h1>A Decentralized Notebook</h1>
-            <p>
-              Write your notes on Ethereum network. Nobody can modify or take it down.
-            </p>
-            <p>
-              <Button bsStyle="primary">Learn more</Button>
-            </p>
-          </Jumbotron>
-          <MarkdownEditor />
           <Router>
             <div>
               <Route

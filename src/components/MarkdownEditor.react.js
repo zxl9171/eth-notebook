@@ -12,6 +12,15 @@ Changes are automatically rendered as you type.
 * Renders actual, "native" React DOM elements
 * Allows you to escape or skip HTML (try toggling the checkboxes above)
 * If you escape or skip the HTML, no \`dangerouslySetInnerHTML\` is used! Yay!
+
+## Tables?
+
+| Feature | Support |
+| ------ | ----------- |
+| tables | ✔ |
+| alignment | ✔ |
+| wewt | ✔ |
+
 `
 
 class MarkdownEditor extends React.Component {
