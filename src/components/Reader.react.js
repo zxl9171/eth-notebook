@@ -4,8 +4,9 @@ import ReactMarkdown from 'react-markdown'
 
 var Web3 = require('web3')
 var web3 = new Web3(Web3.givenProvider);
-const Eth = require('ethjs');
-const eth = new Eth(web3.currentProvider);
+if(!web3.currentProvider) {
+  web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/zlPxlGZa5NUkLUBHtUVl'));
+}
 
 class Reader extends React.Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class Reader extends React.Component {
   }
 
   componentWillMount() {
-    eth.getTransactionByHash(this.props.match.params.txid, (err,transaction) => {
+
+    web3.eth.getTransaction(this.props.match.params.txid, (err,transaction) => {
       console.log(transaction);
       if(!transaction){
         this.setState({content: 'No transaction found'});

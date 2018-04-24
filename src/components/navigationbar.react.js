@@ -7,7 +7,7 @@ class NavigationBar extends React.Component {
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#brand">ETH Notebook</a>
+            <a href={process.env.PUBLIC_URL}>ETH Notebook</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
