@@ -9,8 +9,6 @@ import {Jumbotron, Button} from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
 import Home from './components/Home.react.js'
 import Reader from './components/Reader.react.js'
-import reducers from './reducers/reducers'
-import NavigationBar from './components/NavigationBar.react.js'
 import MarkdownEditor from './components/MarkdownEditor.react.js'
 import logo from './css/logo.svg';
 import './css/App.css';

@@ -3,12 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
     "markdown": "^0.5.0",
-=======
     "ethjs": "^0.3.6",
     "gh-pages": "^1.1.0",
->>>>>>> 1944b076623b0139de227fa12566ed5d11ad3a4a
     "react": "^16.3.2",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.2",
