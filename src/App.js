@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-import { Router, Route } from 'react-router'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
-import { Jumbotron, Button } from 'react-bootstrap'
-
+import reducers from './reducers/reducers'
+import NavigationBar from './components/navigationbar.react.js'
+import {Jumbotron, Button} from 'react-bootstrap'
+import ReactMarkdown from 'react-markdown'
+import Home from './components/Home.react.js'
+import Reader from './components/Reader.react.js'
 import reducers from './reducers/reducers'
 import NavigationBar from './components/NavigationBar.react.js'
+import MarkdownEditor from './components/MarkdownEditor.react.js'
 import logo from './css/logo.svg';
 import './css/App.css';
-
-import MarkdownEditor from './components/MarkdownEditor.react.js'
 
 const store = createStore(
   combineReducers({
@@ -36,6 +39,20 @@ class App extends Component {
             </p>
           </Jumbotron>
           <MarkdownEditor />
+          <Router>
+            <div>
+              <Route
+                path={process.env.PUBLIC_URL + '/'}
+                exact={true}
+                component={Home}
+              />
+              <Route
+                path={process.env.PUBLIC_URL + '/tx/:txid'}
+                exact={true}
+                component={Reader}
+              />
+            </div>
+          </Router>
         </div>
       </Provider>
     );
