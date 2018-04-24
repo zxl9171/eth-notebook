@@ -1,0 +1,10 @@
+.textarea {
+  width: 100%;
+  resize:vertical;
+}
+
+.jumbotron {
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: left;
+}
