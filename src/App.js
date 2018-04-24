@@ -3,12 +3,15 @@ import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import { Router, Route } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
-import reducers from './reducers/reducers'
-import NavigationBar from './components/navigationbar.react.js'
-import {Jumbotron, Button} from 'react-bootstrap'
+import { Jumbotron, Button } from 'react-bootstrap'
 
+import reducers from './reducers/reducers'
+import NavigationBar from './components/NavigationBar.react.js'
 import logo from './css/logo.svg';
 import './css/App.css';
+
+import MarkdownEditor from './components/MarkdownEditor.react.js'
+
 const store = createStore(
   combineReducers({
     ...reducers,
@@ -32,6 +35,7 @@ class App extends Component {
               <Button bsStyle="primary">Learn more</Button>
             </p>
           </Jumbotron>
+          <MarkdownEditor />
         </div>
       </Provider>
     );
