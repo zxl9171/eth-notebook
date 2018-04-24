@@ -44,30 +44,30 @@ class MarkdownEditor extends React.Component {
       <div>
         <Col sm={6} md={6}>
           <Panel>
+            <Panel.Heading>Input your message here:</Panel.Heading>
+            <Panel.Body>
+              <textarea
+                id="noter-text-area"
+                className="textarea"
+                rows="25"
+                name="textarea"
+                placeholder="Type your text in markdown."
+                onChange={this._onChange}>
+              </textarea>
+            </Panel.Body>
+          </Panel>
+        </Col>
+        <Col sm={6} md={6}>
+          <Panel>
             <Panel.Heading>Your text will be:</Panel.Heading>
             <Panel.Body>
-              <Jumbotron className="jumbotron">
+              <Jumbotron className="markdown-display">
                 <Markdown
                   source={this.state.display}
                   skipHtml={false}
                   escapeHtml={false}
                 />
               </Jumbotron>
-            </Panel.Body>
-          </Panel>
-        </Col>
-        <Col sm={6} md={6}>
-          <Panel>
-            <Panel.Heading>Input your message here:</Panel.Heading>
-            <Panel.Body>
-              <textarea
-                id="noter-text-area"
-                className="textarea"
-                rows="20"
-                name="textarea"
-                placeholder="your text in markdown."
-                onChange={this._onChange}>
-              </textarea>
             </Panel.Body>
           </Panel>
         </Col>

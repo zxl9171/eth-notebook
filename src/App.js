@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import reducers from './reducers/reducers'
-import NavigationBar from './components/navigationbar.react.js'
+import NavigationBar from './components/NavigationBar.react.js'
 import {Jumbotron, Button} from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
 import Home from './components/Home.react.js'

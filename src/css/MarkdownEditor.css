@@ -1,9 +1,11 @@
 .textarea {
   width: 100%;
-  resize:vertical;
+  height: 100%;
+  resize: none;
+  border: 0px;
 }
 
-.jumbotron {
+.markdown-display {
   padding-left: 20px;
   padding-right: 20px;
   text-align: left;
