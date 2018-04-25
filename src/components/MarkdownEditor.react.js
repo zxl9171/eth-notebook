@@ -18,7 +18,7 @@ automatically rendered as you type.
 
 \`\`\`
 def helloWorld():
-  print("This line will be printed.")
+  print("Hello World!")
 \`\`\`
 
 ## Tables?
