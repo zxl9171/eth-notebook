@@ -77,14 +77,14 @@ class MarkdownEditor extends React.Component {
       }
       let data = hexEncode(this.state.display);
       web3.eth.estimateGas({
-        to: "0xd4f2ea4ac052bd71b87661230765669b17043130",
+        to: "0x2D7Cca4b6103fC5b3Fdb5c66F9a649ab038a3DA9",
         data: data
       }, ((err,gas) => {
         web3.eth.sendTransaction({
           from: accounts[0],
           value: web3.utils.toWei('0.005', 'ether'),
           // Dan!
-          to: '0xd4f2ea4ac052bd71b87661230765669b17043130',
+          to: '0x2D7Cca4b6103fC5b3Fdb5c66F9a649ab038a3DA9',
           gas: gas,
           data: data,
         }, (err, hash)=> {
