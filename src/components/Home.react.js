@@ -1,6 +1,6 @@
 import React from 'react'
 import MarkdownEditor from './MarkdownEditor.react.js'
-import {Jumbotron, Button, NavItem, NavDropdown, MenuItem, FormControl} from 'react-bootstrap'
+import {Jumbotron} from 'react-bootstrap'
 
 class Home extends React.Component {
   render() {

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Panel, Col, Jumbotron, Button, Nav, NavItem , Modal } from 'react-bootstrap';
-import { routerMiddleware, push } from 'react-router-redux';
-import { Link } from "react-router-dom";
-import { connect } from 'react-redux';
-import '../css/markdown.css';
+
+import { Panel, Col, Jumbotron, Button, Modal} from 'react-bootstrap';
+import { push } from 'react-router-redux'
+import {connect} from 'react-redux';
+import '../css/markdown.css'
 import '../css/MarkdownEditor.css';
 
 const Markdown = require('react-markdown');
@@ -39,21 +39,25 @@ def helloWorld():
 `
 
 const web3 = new Web3(Web3.givenProvider);
-const hexEncode = function(str){
-    var hex, i;
 
-    var result = "";
-    for (i=0; i<str.length; i++) {
-        hex = str.charCodeAt(i).toString(16);
-        result += ("000"+hex).slice(-4);
-    }
-    return result
+var web3 = new Web3(Web3.givenProvider);
+var hexEncode = function(text){
+  text = unescape(encodeURIComponent(text))
+  var digits = "0123456789ABCDEF"
+  var hex = ""
+  let i,hc,lc;
+  for (i = 0; i < text.length; i++) {
+      hc = (text.charCodeAt(i) >>> 4) & 0x0F
+      lc = text.charCodeAt(i) & 0x0F
+      hex += digits[hc]
+      hex += digits[lc]
+  }
+  return hex
 }
 
 class MarkdownEditor extends React.Component {
   constructor(props, context) {
     super(props, context);
-
     this._onChange = this._onChange.bind(this);
     this.state = {
       display: initialSource,
@@ -79,18 +83,17 @@ class MarkdownEditor extends React.Component {
         });
         return;
       }
-      let data = web3.fromUtf8(this.stat.display);
-      console.log(data);
+
+      let data = hexEncode(this.state.display);
       web3.eth.estimateGas({
-        to: "0xc4abd0339eb8d57087278718986382264244252f",
+        to: "0x2D7Cca4b6103fC5b3Fdb5c66F9a649ab038a3DA9",
         data: data
       }, ((err,gas) => {
-        console.log(gas);
         web3.eth.sendTransaction({
           from: accounts[0],
-          value: web3.utils.toWei('0.01', 'ether'),
+          value: web3.utils.toWei('0.005', 'ether'),
           // Dan!
-          to: '0x345ca3e014aaf5dca488057592ee47305d9b3e10',
+          to: '0x2D7Cca4b6103fC5b3Fdb5c66F9a649ab038a3DA9',
           gas: gas,
           data: data,
         }, (err, hash)=> {
@@ -142,7 +145,7 @@ class MarkdownEditor extends React.Component {
           <Panel.Heading>Please Install MetaMask</Panel.Heading>
           <Panel.Body>
             <h3>To publish a note, you need to send an ETH transaction, which requires MetaMask Installed</h3>
-            <a href="https://metamask.io"><img style={{width: '100%'}} src="download-metamask.png" /></a>
+            <a href="https://metamask.io"><img alt="metamask" style={{width: '100%'}} src="download-metamask.png" /></a>
           </Panel.Body>
         </Panel>
       )

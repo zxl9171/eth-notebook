@@ -1,7 +1,6 @@
 import React from 'react'
-import {Navbar, Nav, NavItem, NavDropdown, FormControl} from 'react-bootstrap'
-import { Route, Redirect } from 'react-router'
-import { routerMiddleware, push } from 'react-router-redux'
+import {Navbar, Nav, NavItem, FormControl} from 'react-bootstrap'
+import { push } from 'react-router-redux'
 import {connect} from 'react-redux'
 import {Link } from "react-router-dom";
 
@@ -36,8 +35,6 @@ class NavigationBar extends React.Component {
                 onChange={e=>this.setState({input: e.target.value})}
                 onKeyUp={e=>{
                   if(e.key==='Enter'){
-                    console.log(this.props.dispatch);
-                    console.log(push);
                     this.props.dispatch(
                       push(process.env.PUBLIC_URL + '/tx/'+this.state.input)
                     );
