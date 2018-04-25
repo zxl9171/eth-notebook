@@ -11,8 +11,10 @@ const Web3 = require('web3');
 const utf8 = require('utf8');
 
 const initialSource = `
-# ETH-notebook 以太坊记事本
-## 没人删的掉的记事本
+# ETH-notebook
+# 以太坊记事本
+
+没人删的掉的记事本
 
 Put what you want to share into the textbox and put it into the ETH network.
 Nobody can remove the message.
@@ -41,7 +43,6 @@ def helloWorld():
 
 const web3 = new Web3(Web3.givenProvider);
 
-var web3 = new Web3(Web3.givenProvider);
 var hexEncode = function(text){
   text = unescape(encodeURIComponent(text))
   var digits = "0123456789ABCDEF"
