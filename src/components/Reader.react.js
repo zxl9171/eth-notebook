@@ -1,8 +1,10 @@
 import React from 'react'
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem, FormControl} from 'react-bootstrap'
-import ReactMarkdown from 'react-markdown'
+import '../css/Reader.css'
+import '../css/markdown.css'
+const Markdown = require('react-markdown');
+const Web3 = require('web3');
 
-var Web3 = require('web3')
 var web3 = new Web3(Web3.givenProvider);
 if(!web3.currentProvider) {
   web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/zlPxlGZa5NUkLUBHtUVl'));
@@ -31,8 +33,12 @@ class Reader extends React.Component {
   }
 
   render() {
+    console.log(this.state.content);
     return (
-      <ReactMarkdown source={this.state.content} />
+      <Markdown
+        className="reader"
+        source={this.state.content}
+      />
     );
   }
 }
