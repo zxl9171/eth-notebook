@@ -1,6 +1,8 @@
 import React from 'react'
 import '../css/Reader.css'
 import '../css/markdown.css'
+import { Panel, Col, Row, Modal} from 'react-bootstrap';
+
 const Markdown = require('react-markdown');
 const Web3 = require('web3');
 
@@ -37,14 +39,13 @@ class Reader extends React.Component {
   }
   componentWillReceiveProps(newProps) {
     web3.eth.getTransaction(newProps.match.params.txid, (err,transaction) => {
-      console.log(transaction);
       if(!transaction){
         this.setState({content: 'No transaction found'});
         return;
       }
-      var hex  = transaction.input.toString();
-      let str = decodeURIComponent(hex.replace(/\s+/g, '').replace(/[0-9a-f]{2}/g, '%$&'));
-      this.setState({content: str});
+      var hex  = transaction.input.toString().substring(2);
+      // let str = decodeURIComponent(hex.replace(/\s+/g, '').replace(/[0-9a-f]{2}/g, '%$&'));
+      this.setState({content: hex2utf8(hex)});
     });
   }
   componentWillMount() {
@@ -53,7 +54,7 @@ class Reader extends React.Component {
         this.setState({content: 'No transaction found'});
         return;
       }
-      var hex  = transaction.input.toString();
+      var hex  = transaction.input.toString().substring(2);
       this.setState({content: hex2utf8(hex)});
     });
   }
@@ -61,10 +62,14 @@ class Reader extends React.Component {
   render() {
     return (
       <div>
-        <Markdown
-          className="reader"
-          source={this.state.content}
-        />
+        <Row>
+          <Col xs={10} sm={8} smOffset={2} xsOffset={1}>
+            <Markdown
+              className="reader"
+              source={this.state.content}
+            />
+          </Col>
+        </Row>
       </div>
     );
   }
