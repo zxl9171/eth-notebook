@@ -29,5 +29,5 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://zxl9171.github.io/eth-notebook/"
+  "homepage": "http://ethnotebook.com/"
 }
