@@ -6,6 +6,7 @@ import '../css/markdown.css'
 import '../css/MarkdownEditor.css';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
+import utf8 from 'utf8';
 const Markdown = require('react-markdown');
 const initialSource = `
 # ETH-notebook
@@ -33,23 +34,24 @@ def helloWorld():
 | wewt | ✔ |
 
 `
-
 var Web3 = require('web3')
 var web3 = new Web3(Web3.givenProvider);
-var hexEncode = function(str){
-    var hex, i;
-
-    var result = "";
-    for (i=0; i<str.length; i++) {
-        hex = str.charCodeAt(i).toString(16);
-        result += ("000"+hex).slice(-4);
-    }
-    return result
+var hexEncode = function(text){
+  text = unescape(encodeURIComponent(text))
+  var digits = "0123456789ABCDEF"
+  var hex = ""
+  let i,hc,lc;
+  for (i = 0; i < text.length; i++) {
+      hc = (text.charCodeAt(i) >>> 4) & 0x0F
+      lc = text.charCodeAt(i) & 0x0F
+      hex += digits[hc]
+      hex += digits[lc]
+  }
+  return hex
 }
 class MarkdownEditor extends React.Component {
   constructor(props, context) {
     super(props, context);
-
     this._onChange = this._onChange.bind(this);
     this.state = {
       display: initialSource,
@@ -67,8 +69,6 @@ class MarkdownEditor extends React.Component {
 
   genTransaction = () => {
     web3.eth.getAccounts((error, accounts) => {
-      console.log(error);
-      console.log(accounts);
       if(!accounts[0]) {
         this.setState({
           modal_title:'Please Unlock Your Account or Add an Account to MetaMask',
@@ -78,17 +78,15 @@ class MarkdownEditor extends React.Component {
         return;
       }
       let data = hexEncode(this.state.display);
-      console.log(data);
       web3.eth.estimateGas({
-        to: "0xc4abd0339eb8d57087278718986382264244252f",
+        to: "0xd4f2ea4ac052bd71b87661230765669b17043130",
         data: data
       }, ((err,gas) => {
-        console.log(gas);
         web3.eth.sendTransaction({
           from: accounts[0],
-          value: web3.utils.toWei('0.01', 'ether'),
+          value: web3.utils.toWei('0.005', 'ether'),
           // Dan!
-          to: '0x345ca3e014aaf5dca488057592ee47305d9b3e10',
+          to: '0xd4f2ea4ac052bd71b87661230765669b17043130',
           gas: gas,
           data: data,
         }, (err, hash)=> {
