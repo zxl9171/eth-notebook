@@ -1,13 +1,18 @@
 import React from 'react';
+
 import { Panel, Col, Jumbotron, Button, Modal} from 'react-bootstrap';
 import { push } from 'react-router-redux'
-import '../css/markdown.css'
-
-import '../css/MarkdownEditor.css';
 import {connect} from 'react-redux';
+import '../css/markdown.css'
+import '../css/MarkdownEditor.css';
+
 const Markdown = require('react-markdown');
+const Web3 = require('web3');
+const utf8 = require('utf8');
+
 const initialSource = `
-# ETH-notebook
+# ETH-notebook 以太坊记事本
+## 没人删的掉的记事本
 
 Put what you want to share into the textbox and put it into the ETH network.
 Nobody can remove the message.
@@ -33,7 +38,9 @@ def helloWorld():
 | wewt | ✔ |
 
 `
-var Web3 = require('web3')
+
+const web3 = new Web3(Web3.givenProvider);
+
 var web3 = new Web3(Web3.givenProvider);
 var hexEncode = function(text){
   text = unescape(encodeURIComponent(text))
@@ -48,6 +55,7 @@ var hexEncode = function(text){
   }
   return hex
 }
+
 class MarkdownEditor extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -68,7 +76,7 @@ class MarkdownEditor extends React.Component {
 
   genTransaction = () => {
     web3.eth.getAccounts((error, accounts) => {
-      if(!accounts[0]) {
+      if(!accounts || !accounts[0]) {
         this.setState({
           modal_title:'Please Unlock Your Account or Add an Account to MetaMask',
           modal_body: <p>You need to send a ETH transaction to publish the note</p>,
@@ -76,6 +84,7 @@ class MarkdownEditor extends React.Component {
         });
         return;
       }
+
       let data = hexEncode(this.state.display);
       web3.eth.estimateGas({
         to: "0x2D7Cca4b6103fC5b3Fdb5c66F9a649ab038a3DA9",
@@ -109,7 +118,6 @@ class MarkdownEditor extends React.Component {
           }
         });
       }))
-
     })
   }
 
@@ -178,7 +186,7 @@ class MarkdownEditor extends React.Component {
             <Modal.Title>{this.state.modal_title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>{this.state.modal_body}</p>
+            {this.state.modal_body}
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose}>Close</Button>
