@@ -1,14 +1,18 @@
 import React from 'react';
-import { Panel, Col, Jumbotron, Button, Nav, NavItem , Modal} from 'react-bootstrap';
-import { routerMiddleware, push } from 'react-router-redux'
-import '../css/markdown.css'
-
+import { Panel, Col, Jumbotron, Button, Nav, NavItem , Modal } from 'react-bootstrap';
+import { routerMiddleware, push } from 'react-router-redux';
+import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import '../css/markdown.css';
 import '../css/MarkdownEditor.css';
-import {Link} from "react-router-dom";
-import {connect} from 'react-redux';
+
 const Markdown = require('react-markdown');
+const Web3 = require('web3');
+const utf8 = require('utf8');
+
 const initialSource = `
-# ETH-notebook
+# ETH-notebook 以太坊记事本
+## 没人删的掉的记事本
 
 Put what you want to share into the textbox on the left and changes are
 automatically rendered as you type.
@@ -34,9 +38,8 @@ def helloWorld():
 
 `
 
-var Web3 = require('web3')
-var web3 = new Web3(Web3.givenProvider);
-var hexEncode = function(str){
+const web3 = new Web3(Web3.givenProvider);
+const hexEncode = function(str){
     var hex, i;
 
     var result = "";
@@ -46,6 +49,7 @@ var hexEncode = function(str){
     }
     return result
 }
+
 class MarkdownEditor extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -67,9 +71,7 @@ class MarkdownEditor extends React.Component {
 
   genTransaction = () => {
     web3.eth.getAccounts((error, accounts) => {
-      console.log(error);
-      console.log(accounts);
-      if(!accounts[0]) {
+      if(!accounts || !accounts[0]) {
         this.setState({
           modal_title:'Please Unlock Your Account or Add an Account to MetaMask',
           modal_body: <p>You need to send a ETH transaction to publish the note</p>,
@@ -77,7 +79,7 @@ class MarkdownEditor extends React.Component {
         });
         return;
       }
-      let data = hexEncode(this.state.display);
+      let data = web3.fromUtf8(this.stat.display);
       console.log(data);
       web3.eth.estimateGas({
         to: "0xc4abd0339eb8d57087278718986382264244252f",
@@ -112,12 +114,11 @@ class MarkdownEditor extends React.Component {
           }
         });
       }))
-
     })
   }
 
   _getInputPanel = () => {
-    if(web3.currentProvider) {
+    if(!web3.currentProvider) {
       return (
         <Panel>
           <Panel.Heading className="clearfix">Input your message here:
@@ -181,7 +182,7 @@ class MarkdownEditor extends React.Component {
             <Modal.Title>{this.state.modal_title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>{this.state.modal_body}</p>
+            {this.state.modal_body}
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose}>Close</Button>
