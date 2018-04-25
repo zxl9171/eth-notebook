@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom"
-import { browserHistory } from 'react-router'
+import { Route} from "react-router-dom"
 import reducers from './reducers/reducers'
 import NavigationBar from './components/NavigationBar.react.js'
-import {Jumbotron, Button} from 'react-bootstrap'
-import ReactMarkdown from 'react-markdown'
 import Home from './components/Home.react.js'
 import Reader from './components/Reader.react.js'
-import logo from './css/logo.svg';
 import './css/App.css';
 import createHistory from 'history/createBrowserHistory'
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
+import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory()

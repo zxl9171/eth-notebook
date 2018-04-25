@@ -1,12 +1,10 @@
 import React from 'react';
-import { Panel, Col, Jumbotron, Button, Nav, NavItem , Modal} from 'react-bootstrap';
-import { routerMiddleware, push } from 'react-router-redux'
+import { Panel, Col, Jumbotron, Button, Modal} from 'react-bootstrap';
+import { push } from 'react-router-redux'
 import '../css/markdown.css'
 
 import '../css/MarkdownEditor.css';
-import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
-import utf8 from 'utf8';
 const Markdown = require('react-markdown');
 const initialSource = `
 # ETH-notebook
@@ -139,7 +137,7 @@ class MarkdownEditor extends React.Component {
           <Panel.Heading>Please Install MetaMask</Panel.Heading>
           <Panel.Body>
             <h3>To publish a note, you need to send an ETH transaction, which requires MetaMask Installed</h3>
-            <a href="https://metamask.io"><img style={{width: '100%'}} src="download-metamask.png" /></a>
+            <a href="https://metamask.io"><img alt="metamask" style={{width: '100%'}} src="download-metamask.png" /></a>
           </Panel.Body>
         </Panel>
       )

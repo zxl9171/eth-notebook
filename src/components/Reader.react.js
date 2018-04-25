@@ -1,5 +1,4 @@
 import React from 'react'
-import {Navbar, Nav, NavItem, NavDropdown, MenuItem, FormControl} from 'react-bootstrap'
 import '../css/Reader.css'
 import '../css/markdown.css'
 const Markdown = require('react-markdown');
