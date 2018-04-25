@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "disqus-react": "^1.0.5",
     "ethjs": "^0.3.6",
     "gh-pages": "^1.1.0",
     "history": "^4.7.2",

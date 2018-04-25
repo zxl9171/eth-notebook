@@ -1,7 +1,8 @@
 import React from 'react'
 import '../css/Reader.css'
 import '../css/markdown.css'
-import { Panel, Col, Row, Modal} from 'react-bootstrap';
+import {Col, Row} from 'react-bootstrap';
+import Disqus from 'disqus-react';
 
 const Markdown = require('react-markdown');
 const Web3 = require('web3');
@@ -60,6 +61,12 @@ class Reader extends React.Component {
   }
 
   render() {
+    const disqusShortname = 'ethnotebook';
+    const disqusConfig = {
+        url: window.location.href,
+        identifier: this.props.match.params.txid,
+        title: this.props.match.params.txid,
+    };
     return (
       <div>
         <Row>
@@ -68,6 +75,11 @@ class Reader extends React.Component {
               className="reader"
               source={this.state.content}
             />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={10} sm={8} smOffset={2} xsOffset={1}>
+            <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
           </Col>
         </Row>
       </div>

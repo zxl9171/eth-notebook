@@ -8,7 +8,6 @@ import '../css/MarkdownEditor.css';
 
 const Markdown = require('react-markdown');
 const Web3 = require('web3');
-const utf8 = require('utf8');
 
 const initialSource = `
 # ETH-notebook
@@ -112,7 +111,11 @@ class MarkdownEditor extends React.Component {
               modal_body: <div>
                 <p>Your transaction has been sent. Please wait until your transaction be mined.</p>
                 <p>Once the transaction is mined, you can check your note here:</p>
-                <Button onClick={e=> this.props.dispatch(push(process.env.PUBLIC_URL + '/tx/'+hash))}>Take me to my note</Button>
+                <p>Check your transaction status:</p>
+                <p><a target="_blank" href={'https://etherscan.io/tx/'+hash}>{'https://etherscan.io/tx/'+hash}</a></p>
+                <Button onClick={e=> this.props.dispatch(push(process.env.PUBLIC_URL + '/tx/'+hash))}>View my note</Button>
+                <p>Share the note with this link</p>
+                <p>{'http://ethnotebook.com/tx/'+hash}</p>
               </div>,
               modal_show: true,
             });
