@@ -118,7 +118,7 @@ class MarkdownEditor extends React.Component {
   }
 
   _getInputPanel = () => {
-    if(!web3.currentProvider) {
+    if(web3.currentProvider) {
       return (
         <Panel>
           <Panel.Heading className="clearfix">Input your message here:
