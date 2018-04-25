@@ -1,27 +1,48 @@
 import React from 'react'
-import {Navbar, Nav, NavItem, NavDropdown, MenuItem, FormControl} from 'react-bootstrap'
+import {Navbar, Nav, NavItem, NavDropdown, FormControl} from 'react-bootstrap'
+import { Route, Redirect } from 'react-router'
+import { routerMiddleware, push } from 'react-router-redux'
+import {connect} from 'react-redux'
+import {Link } from "react-router-dom";
 
 class NavigationBar extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      input: '',
+      redirect: false,
+    };
+  }
+  componentWillMount() {
+    this.setState({redirect: false});
+  }
+
   render() {
     return (
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href={process.env.PUBLIC_URL}>ETH Notebook</a>
+            <Link to={process.env.PUBLIC_URL}>ETH Notebook</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav>
-            <NavItem eventKey={1} href="#">
-              Start Writing
-            </NavItem>
-          </Nav>
           <Nav pullRight>
             <NavItem eventKey={1} href="#">
               <FormControl
                 type="text"
                 placeholder="Enter Transaction ID"
+                value={this.state.input}
+                onChange={e=>this.setState({input: e.target.value})}
+                onKeyUp={e=>{
+                  if(e.key==='Enter'){
+                    console.log(this.props.dispatch);
+                    console.log(push);
+                    this.props.dispatch(
+                      push(process.env.PUBLIC_URL + '/tx/'+this.state.input)
+                    );
+                  }
+                }}
               />
             </NavItem>
           </Nav>
@@ -31,4 +52,4 @@ class NavigationBar extends React.Component {
   }
 }
 
-export default NavigationBar;
+export default connect()(NavigationBar);

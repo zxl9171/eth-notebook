@@ -11,9 +11,6 @@ class Home extends React.Component {
           <p>
             Write and share your notes on Ethereum network. Nobody can modify or take it down.
           </p>
-          <p>
-            <Button bsStyle="primary">Learn more</Button>
-          </p>
         </Jumbotron>
         <MarkdownEditor />
       </div>
