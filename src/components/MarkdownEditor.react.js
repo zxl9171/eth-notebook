@@ -1,20 +1,28 @@
 import React from 'react';
 import { Panel, Col, Jumbotron, Button, Nav, NavItem , Modal} from 'react-bootstrap';
 import { routerMiddleware, push } from 'react-router-redux'
+import '../css/markdown.css'
 
 import '../css/MarkdownEditor.css';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 const Markdown = require('react-markdown');
 const initialSource = `
-# Live demo
+# ETH-notebook
 
-Changes are automatically rendered as you type.
+Put what you want to share into the textbox on the left and changes are
+automatically rendered as you type.
 
+* Markdown language supported and recommended
 * Implements [GitHub Flavored Markdown](https://github.github.com/gfm/)
-* Renders actual, "native" React DOM elements
-* Allows you to escape or skip HTML (try toggling the checkboxes above)
 * If you escape or skip the HTML, no \`dangerouslySetInnerHTML\` is used! Yay!
+
+## Codeblock?
+
+\`\`\`
+def helloWorld():
+  print("Hello World!")
+\`\`\`
 
 ## Tables?
 
