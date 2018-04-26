@@ -18,7 +18,7 @@ class NavigationBar extends React.Component {
 
   render() {
     return (
-      <Navbar inverse collapseOnSelect>
+      <Navbar inverse collapseOnSelect staticTop>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to={process.env.PUBLIC_URL}>ETH Notebook</Link>
